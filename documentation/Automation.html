@@ -1,0 +1,1942 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>Automation</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Automation</h1>
+<span id="author">Amitayush Thakur</span><br />
+<span id="email"><code>&lt;<a href="mailto:amit9oct@gmail.com">amit9oct@gmail.com</a>&gt;</code></span><br />
+<span id="revdate">12 July 2014</span>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introduction">1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The module is about automation of copying and restoring of configuration files of devices (routers in most of the cases) connected to the network.The module is the backend for the web interface which allows injecting commands into the telnet
+terminal through user interface. Generally such kinds of modules or programs are called automation
+modules. Telnet is a network protocol used on the Internet or local area networks (LAN) to provide a
+bidirectional interactive text-oriented communication facility using a virtual terminal connection. User
+data is interspersed in-band with Telnet control information in an 8-bit byte oriented data connection
+over the Transmission Control Protocol (TCP).
+In this project very famous Expect tool is used for injecting commands into telnet terminal. Expect is an
+extension to the Tcl scripting language written by Don Libes, is a program to automate interactions with
+programs that expose a text terminal interface. Expect was originally written in 1990 for Unix systems,
+but is now also available for Microsoft Windows and other systems. It is used to automate control of
+interactive applications such telnet, ftp, passwd, fsck, rlogin, tip, ssh, and others. Expect uses pseudo
+terminals (Unix) or emulates a console (Windows), starts the target program, and then communicates
+with it, just as a human would, via the terminal or console interface.
+The project involves connecting to the required device via telnet client utility using expect library and
+then executing some commands to make a backup of configuration files of the device on the server.The
+overall working of the module in this project is as follows:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/workingPrinciple.jpg" alt="Working Principle" />
+</span></p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_folder_organization">2. Folder Organization</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><span class="image">
+<img src="images/folderStructure.png" alt="Folder Structure" />
+</span></p></div>
+<div class="sect2">
+<h3 id="_bin">2.1. bin</h3>
+<div class="sect3">
+<h4 id="_contains_folders">2.1.1. Contains folders:</h4>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+<code>configurationClass</code>: Contains two classes Backup.class and BackupRestore.class
+</p>
+</li>
+<li>
+<p>
+<code>expectForJava</code>: Contains one class Expect.class
+</p>
+</li>
+<li>
+<p>
+<code>databaseConnect</code>: Contains one class DatabaseConnect.class
+</p>
+</li>
+<li>
+<p>
+<code>telnetConnect</code>: Contains two class TelnetConnect.class and TestTelnet.class
+</p>
+</li>
+<li>
+<p>
+<code>testPackage</code>: Contains two classes Test1.class and TelnetClient.class
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_src">2.2. src</h3>
+<div class="sect3">
+<h4 id="_contains_folders_2">2.2.1. Contains folders:</h4>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+<code>configurationClass</code>: Contains the source code files for three classes. The files names are Backup.java,BackupRestore.java and Restore.java
+</p>
+</li>
+<li>
+<p>
+<code>expectForJava</code>: Contains one source code for the class Expect. The file name is Expect.java
+</p>
+</li>
+<li>
+<p>
+<code>databaseConnect</code> : Contains source code for DatabaseConnect class.
+</p>
+</li>
+<li>
+<p>
+<code>telnetConnect</code>: Contains two source code files for two class. The file names are TelnetConnect.java and TestTelnet.java
+</p>
+</li>
+<li>
+<p>
+<code>testPackage</code>: Contains two source code files for two classes. The file names are Test1.java and TelnetClient.java
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jars">2.3. jars</h3>
+<div class="paragraph"><p>Contains four .jar files which are used by the classes in the program. The following are the four .jar files:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+<code>jsch-0.1.51.jar</code>: Used by the classes BackupRestore and Backup in order to connect via SSH(Secure Shell).
+</p>
+</li>
+<li>
+<p>
+<code>junit-4.2.jar</code>: Used by the class Expect. Has use in some internal implementation.More information can be found in the documentation of the Expect-for-Java library <a href="https://github.com/ronniedong/Expect-for-Java">Github Expect-for-Java</a>.
+</p>
+</li>
+<li>
+<p>
+<code>log4j-1.2.17.jar</code>: Used for creating log.txt and in internal implementation of Expect-for-Java.
+</p>
+</li>
+<li>
+<p>
+`org.apache.com.mons.io.jar: Used by the class TelnetClient for parsing the raw bytes sent by the communication socket.
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_logs">2.4. logs</h3>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+<code>Contains a file log.txt</code>. This file maintains the log of what happens when the code is running. The following is a small look of what log.txt looks like on successful execution of program.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p><span class="image">
+<img src="images/logImage.png" alt="Log Files" />
+</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="_settings">2.5. settings</h3>
+<div class="paragraph"><p>Contains configuration files. There are three configuration files. There is one folder RouterCommands which contains a file CISCO.properties and two other files are contained in folder settings. The .properties files are:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+<code>commandFileLocationFile.properties</code>: Contains the file location of the file which contains the list of the commands for the device.
+</p>
+</li>
+<li>
+<p>
+<code>defaultSettings.properties</code>: Contains the default backup server IP and other details and default settings of the program. It also contains the names of the table in the database and the database username and password.
+</p>
+</li>
+<li>
+<p>
+<code>CISCO.properties</code>: Contains list of commands for cisco router other Files
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_other_files">2.6. other files</h3>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+<code>log4j.properties</code>: Contains properties for writing log.txt.
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_organization_of_classes">3. Organization of Classes</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><span class="image">
+<img src="images/AutomationClassDiagram.jpg" alt="Class diagram of the module" />
+</span></p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_backuprestore_class">4. BackupRestore Class</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Contains properties common to Backup and Restore classes. There is a file
+"Automation/settings/defaultSettings.properties" with default properties. This can be used to manipulate
+default host and other default settings.</p></div>
+<div class="sect2">
+<h3 id="_attributes_of_backuprestore">4.1. Attributes of BackupRestore:</h3>
+<div class="paragraph"><p><strong>The following are the main attributes</strong>.</p></div>
+<div class="tableblock">
+<table rules="all"
+style="margin-left:auto; margin-right:auto;"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="center" valign="top">Attribute Name   </th>
+<th align="center" valign="top">Type       </th>
+<th align="center" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table"><em>DEFAULT_SETTINGS_FILE_LOCATION</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Contains the location for settings file. Is set to private. The default values is <code>settings/defaultSettings.properties</code>.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>DEFAULT_SETTINGS_FILE_LOCATION</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Contains the location for settings file. Is set to private. The default values is <code>settings/defaultSettings.properties</code>.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>COMMANDS_FILE_LOCATION_FILE</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Contains the location for files containing the various router commands. Is set to private. The default value is <code>settings/commandFileLocationFile.properties</code>.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>TIME_OUT</em></p></td>
+<td align="center" valign="top"><p class="table"><em>int</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to set TIME_OUT for the expect tool can be directly changed from <code>Automation\settings\defaultSettings.properties</code>.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>FETCHING_DATA_VIA_DATABASE</em></p></td>
+<td align="center" valign="top"><p class="table"><em>boolean</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to decide the medium of fetching device data. It can be either a text file or data base. If value is set true then the medium is database</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>connectionType</em></p></td>
+<td align="center" valign="top"><p class="table"><em>ConnectionType(Enum)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to decide the type of connection telnet or SSH.Can take values SSH or TELNET.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>dbConnect</em></p></td>
+<td align="center" valign="top"><p class="table"><em>DatabaseConnect</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used for establishing connection to the database. Know more about <a href="">DatabaseConnect Class</a></em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>backupFilename</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Contains the backup filename. By default set to <code>dd.MM.yyyy-hh:mm:ss-zzz</code></em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>log</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Logger</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used for logging using <code>log4j API</code>.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>telnetClient</em></p></td>
+<td align="center" valign="top"><p class="table"><em>TelnetConnect</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used for connecting to the network device via Telnet protocol.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>expect</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Expect</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used by Expect tool.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>backupServerName</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>It contains name of the backup server.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>backupServerIP</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>It contains backup servr&#8217;s IP address.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>backupServerPassword</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>It stores the password for the backup server.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>backupServerFolderLocation</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>It stores the folder location on the backup server where the files will be copied.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>backupServerType</em></p></td>
+<td align="center" valign="top"><p class="table"><em>BackupServerType(Enum)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>It stores the type of backup server scp or tftp.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>deviceIP</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>It has the IP of the device for which backup is to made.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>deviceName</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to store the device user name.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>deviceType</em></p></td>
+<td align="center" valign="top"><p class="table"><em>RouterType(Enum)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to store the device type for which backup is to be made. Its default value is stored in <code>defaultSettings.properties</code>.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>devicePassword</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Stores the device password for which backup is to be made.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>deviceEnPassword</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Stores the enable password of the device.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_methods_of_backuprestore">4.2. Methods of BackupRestore:</h3>
+<div class="paragraph"><p><strong>The following are main methods:</strong></p></div>
+<div class="tableblock">
+<table rules="all"
+style="margin-left:auto; margin-right:auto;"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<thead>
+<tr>
+<th align="center" valign="top">Method </th>
+<th align="center" valign="top">Return Type </th>
+<th align="center" valign="top">Parameters </th>
+<th align="center" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table"><em>repetitiveWork()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Private function to carry out repetitive work.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>BackupRestore(String ip)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>ip</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Initializes with the default settings stored in the file <strong>defaultSettings.properties</strong>. Only device IP is passed to it, rest all the settings are default.<strong>Automation/settings/defaultSettings.properties</strong>. Default settings can be modified from the above mentioned file.<strong>throws</strong> <code>FileNotFoundException</code> .</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>BackupRestore(String ip,String argUsername,String argPassword,String argEnPassword,String argDeviceType)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>ip</code>,<code>argUsername</code>,<code>argPassword</code>,<code>argEnPassword</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Initializes with the default settings stored in the file <strong>defaultSettings.properties</strong>. Device IP,device user name,device password,device enable password and device type are passed to it, rest all the settings are default. <strong>Automation/settings/defaultSettings.properties</strong>. Default settings can be modified from the above mentioned file.<strong>throws</strong> <code>FileNotFoundException</code></em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getConnectionType()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>ConnectionType</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Returns the connection type TELNET or SSH</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getBackupServerName()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Returns the name of the backup server(the parameter <strong>backupServerName</strong>)</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getBackupServerIp()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Returns the IP of the backup server.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getBackupServerFolderLocation()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to get the folder location where the copies will be made on the backup server.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getBackupServerType()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>BackupServerType</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to get backup server type.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getDeviceIp()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to get the IP of the device for which backup is being made.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getBackupFilename()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to get backup file name.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getDeviceName()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to get the device user name whose backup is being created.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getDeviceType()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>RouterType(Enum)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to get the device type.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setConnectiontype(String argConnectionType)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argConnectionType</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to set the connection type TELNET or SSH.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setDeviceType(String argDeviceType)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argDeviceType</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to set device type.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setBackupServerName(String argName)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argName</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the parameter <strong>backupServerName</strong> (i.e. the name of the backup server).</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setBackupServerFolderLocation(String argBackupServerFolderLoaction)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argBackupServerFolderLoaction</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to set backup server folder location where files will be saved</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setBackupServerIp(String argIp)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argIp</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the parameter <strong>backupServerIP</strong> (i.e the IP of the backup server).</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setBackupServerType(String argBackupServerType)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argBackupServerType</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to set backup server type.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setDeviceIP(String argIp)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argIp</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the parameter <strong>deviceIP</strong> (i.e. the IP of the device whose backup is to be made).</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setDevicePassword(String argPassword)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argPassword</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the login password for the device. <strong>#NOTE:</strong> There is no getter for devicePassword.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setDeviceEnPassword(String argEnPassword)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argEnPassword</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the enable password of the device whose backup is to be made. <strong>#NOTE:</strong> There is no getter for deviceEnPassword.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setDeviceName(String argDeviceName)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argDeviceName</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the device user name</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setBackupServerPassword(String argPassword)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argPassword</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets backup server password. <strong>#NOTE:</strong> There is no getter method for backupServerPassword.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setBackupFilename(String argBackupFilename)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argBackupFilename</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to set backup file name.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>connectTelnet()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Allows connection through telnet.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>disconnectTelnet()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Disconnects the device through telnet. <strong>throws</strong> Exception.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>connectSSH()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Allows connection through SSH to the device whose IP is present in the field deviceIP. <strong>throws</strong> Exception</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>disconnectSSH()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Disconnects the device which was already connected. <strong>#NOTE:</strong> Should be called only after connectSSH() is called and the field <strong>session</strong> gets initialized.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>enterPrivilegedMode()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Enters into enable mode.<strong>Requires connection first</strong> . So first function connectSSH() should be called. <strong>throws</strong> Exception</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setCommand(String need,String argDeviceType)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>need:</code> Contains the needed Mnemonics for the command, <code>argDeviceType</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>It opens the database and extracts the commands to perform specific task on the device.Like <em>copy</em> function in CISCO router has command Mnemonics as "COPY".</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>startExpectSSH()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used for starting the Expect tool when <code>SSH</code> connection is used. Expect tool is mainly used to pass arguments to the router terminal.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>startExpectTelnet()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used for starting the Expect tool when <code>TELNET</code> connection is used. Expect tool is mainly used to pass arguments to the router terminal.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>connectToDb()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to connect to database using the instance <code>dbConnect</code> of the class <strong>DatabaseConnect</strong>.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_backup_class">5. Backup Class</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This class inherits from the class BackupRestore. As BackupRestore is an abstract class so we
+can change the implementation of certain functions in Backup class. Although this thing has not
+been used but can help someone who will be further modifying the module.
+The attributes of the class Backup is same as protected and public members of BackupRestore as
+Backup inherits from BackupRestore.</p></div>
+<div class="sect2">
+<h3 id="_attributes_of_backup">5.1. Attributes of Backup</h3>
+<div class="paragraph"><p><strong>The main attributes of Backup are:</strong></p></div>
+<div class="tableblock">
+<table rules="all"
+style="margin-left:auto; margin-right:auto;"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="center" valign="top">Attribute Name   </th>
+<th align="center" valign="top">Type       </th>
+<th align="center" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table"><em>filesCopiedSuccessfully</em></p></td>
+<td align="center" valign="top"><p class="table"><em>boolean</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Shows if files are copied successfully or not.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_methods_of_backup">5.2. Methods of Backup</h3>
+<div class="paragraph"><p><strong>The main methods of Backup are:</strong></p></div>
+<div class="tableblock">
+<table rules="all"
+style="margin-left:auto; margin-right:auto;"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<thead>
+<tr>
+<th align="center" valign="top">Method </th>
+<th align="center" valign="top">Return Type </th>
+<th align="center" valign="top">Parameters </th>
+<th align="center" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table"><em>repetitiveWork()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Private function to carry out repetitive work.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>isCopied()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>boolean</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>To get the status if files are copied or not.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>Backup(String ip)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>ip</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the parameters for the device whose backup will be taken. Requires only IP of the device as parameter.Rest all the settings are default.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>Backup(String ip,String username,String password,String enablePassword,String argDeviceType)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>ip</code>,<code>username</code>,<code>password</code>,<code>enablePassword</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the parameters for the device whose backup will be taken. Requires IP,user name,password,enable password and device type of the device. Rest all the settings are default settings.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>copy()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to copy configuration settings for the device. <strong>throws</strong> Exception.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>copy(String argFileName)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argFileName</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to copy configuration settings for the device. It has the version feature to give different file names to different backup files.<strong>throws</strong> Exception.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_restore_class">6. Restore Class</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This class inherits from the class BackupRestore. As BackupRestore is an abstract class so we
+can change the implementation of certain functions in Restore class. Although this thing has not
+been used but can help someone who will be further modifying the module.
+The attributes of the class Restore is same as protected and public members of BackupRestore as
+Restore inherits from BackupRestore.</p></div>
+<div class="sect2">
+<h3 id="_attributes_of_restore">6.1. Attributes of Restore</h3>
+<div class="paragraph"><p><strong>The main attributes of restore are:</strong></p></div>
+<div class="tableblock">
+<table rules="all"
+style="margin-left:auto; margin-right:auto;"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="center" valign="top">Attribute Name   </th>
+<th align="center" valign="top">Type       </th>
+<th align="center" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table"><em>filesRestoredSuccessfully</em></p></td>
+<td align="center" valign="top"><p class="table"><em>boolean</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Shows if files are restored successfully or not.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_methods_of_restore">6.2. Methods of Restore</h3>
+<div class="paragraph"><p><strong>The main methods of Restore are:</strong></p></div>
+<div class="tableblock">
+<table rules="all"
+style="margin-left:auto; margin-right:auto;"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<thead>
+<tr>
+<th align="center" valign="top">Method </th>
+<th align="center" valign="top">Return Type </th>
+<th align="center" valign="top">Parameters </th>
+<th align="center" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table"><em>repetitiveWork()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Private function to carry out repetitive work.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>isRestored()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>boolean</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>To get the status if files are restored or not.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>Restore(String ip)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>ip</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the parameters for the device whose backup will be taken. Requires only IP of the device as parameter.Rest all the settings are default.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>Restore(String ip,String username,String password,String enablePassword,String argDeviceType)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>ip</code>,<code>username</code>,<code>password</code>,<code>enablePassword</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the parameters for the device whose restore will be taken. Requires IP,user name,password,enable password and device type of the device. Rest all the settings are default settings.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>restore(String argFileName)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argFileName</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to restore configuration settings on the device. It needs the restore file name for completing the process of restore. <strong>throws</strong> Exception.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_telnetconnect_class">7. TelnetConnect Class</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This class allows connection via telnet by opening socket and contacting the server via port
+number 23.
+Port 23 selected because by default port 23 is reserved for telnet client. But the class has
+flexibility to change the default port number. This gives freedom to the user to customize the
+settings according to his/her needs.
+Apart from that this class also uses expect tool to fill in the telnet terminal and hence complete
+the process of automatic logging in. The telnetConnect class supports only client socket.</p></div>
+<div class="sect2">
+<h3 id="_attributes_of_telnet_connect">7.1. Attributes of Telnet Connect</h3>
+<div class="paragraph"><p><strong>The following are the important attributes of TelnetConnect:</strong></p></div>
+<div class="tableblock">
+<table rules="all"
+style="margin-left:auto; margin-right:auto;"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="center" valign="top">Attribute Name   </th>
+<th align="center" valign="top">Type       </th>
+<th align="center" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table"><em>TIME_OUT</em></p></td>
+<td align="center" valign="top"><p class="table"><em>int</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to set TIME_OUT for the expect tool and connection. By default set to 1 second.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>DEFAULT_CONNECTION_PORT</em></p></td>
+<td align="center" valign="top"><p class="table"><em>int</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Default connection port is set to 23.<strong>As by default we have 23 as telnet port</strong>.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>expect</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Expect</em></p></td>
+<td align="center" valign="top"><p class="table"><em>For using the expect tool to write commands on telnet terminal.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>client</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Socket</em></p></td>
+<td align="center" valign="top"><p class="table"><em>The telnetConnect supports only client socket.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>input</em></p></td>
+<td align="center" valign="top"><p class="table"><em>InputStream</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the input stream for the socket.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>output</em></p></td>
+<td align="center" valign="top"><p class="table"><em>OutputStream</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Sets the output stream for the socket.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_methods_of_telnet_connect">7.2. Methods of Telnet Connect</h3>
+<div class="paragraph"><p><strong>The following are important methods of the class TelnetConnect:</strong></p></div>
+<div class="tableblock">
+<table rules="all"
+style="margin-left:auto; margin-right:auto;"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<thead>
+<tr>
+<th align="center" valign="top">Method </th>
+<th align="center" valign="top">Return Type </th>
+<th align="center" valign="top">Parameters </th>
+<th align="center" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table"><em>startExpect()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>To start the Expect tool.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>TelnetConnect(String ip,String usrName,String pswd)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>ip</code>,<code>usrName</code>.<code>pswd</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Opens the <strong>default port number 23</strong>. Default port can be changed by changing DEFAULT_CONNECTION_PORT. <strong>throws</strong> Exception.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>startExpect()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>To start the Expect tool.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>TelnetConnect(String ip,String usrName,String pswd)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>ip</code>,<code>usrName</code>.<code>pswd</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Opens the <strong>default port number 23</strong>. Default port can be changed by changing DEFAULT_CONNECTION_PORT. <strong>throws</strong> Exception.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>TelnetConnect(String ip,int port,String usrName,String pswd)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>ip</code>,<code>port</code>,<code>usrName</code>,<code>pswd</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>For connecting via a port other than port 23.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>onScreen()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>To see what&#8217;s on terminal screen <strong>throws</strong> Exception.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>writeOnScreen(String argCommand)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>argCommand</code>: The command to be executed</em></p></td>
+<td align="center" valign="top"><p class="table"><em>To write on telnet terminal .<strong>throws</strong> Exception.<strong>throws</strong> IOException.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>isConnected()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>boolean</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>To check if the client is connected.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getInputStreamForTelnet()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>InputStream</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>For returning the input stream.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getOutputStreamForTelnet()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>OutputStream</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>For returning the output stream.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>disconnect()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>For disconnecting the telnet client.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getExpect()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Expect</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Returns the expect for the use of other tools.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_databaseconnect_class">8. DatabaseConnect Class</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This class is mainly used to connect to the postgres databse using JDBC driver. It has implementation of certain methods which can be used to insert into database, make query and perform other operations on the database.
+There some other subsidary classes which are used by DatabaseConnect. They are:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+<code>Field</code>: Has attributes and methods:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>name</em> : String
+</p>
+</li>
+<li>
+<p>
+<em>type</em> : String
+</p>
+</li>
+<li>
+<p>
+<em>Field(String arg1,int arg2)</em> : constructor which initializes the name of the coloumn and and type of the column.
+</p>
+</li>
+<li>
+<p>
+<em>getStringForInt(int arg)</em> : returns the data type of the column which is then stored into type.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<code>TableInfo</code>: Has attributes and methods:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>tableName</em> : String
+</p>
+</li>
+<li>
+<p>
+<em>fields</em> : ArrayList&lt;Field&gt;
+</p>
+</li>
+<li>
+<p>
+<em>numOfFields</em>: int
+</p>
+</li>
+<li>
+<p>
+<em>getTableName()</em>: returns name of the table.
+</p>
+</li>
+<li>
+<p>
+<em>setNumOfFields(int columnCount)</em>: sets number of Fields in the table.
+</p>
+</li>
+<li>
+<p>
+<em>getNumberOfFields()</em>: returns number of fields in the table.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<code>Values</code> : Has attributes and methods:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>field</em>: Field
+</p>
+</li>
+<li>
+<p>
+<em>object</em>: Object
+</p>
+</li>
+<li>
+<p>
+<em>getValue()</em>: returns the object which comes out of the query/execution of SQL statement
+</p>
+</li>
+<li>
+<p>
+<em>Value(Object value,Field f)</em> : constructor to initialize the Value.
+</p>
+</li>
+</ul></div>
+</li>
+</ol></div>
+<div class="sect2">
+<h3 id="_attributes_of_databaseconnect">8.1. Attributes of DatabaseConnect:</h3>
+<div class="paragraph"><p><strong>The important attributes of class DatabaseConnect are:</strong></p></div>
+<div class="tableblock">
+<table rules="all"
+style="margin-left:auto; margin-right:auto;"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="center" valign="top">Attribute Name   </th>
+<th align="center" valign="top">Type       </th>
+<th align="center" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table"><em>connection</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Connection</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to connect to the database.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>stmt</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Statement</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to execute SQL queries.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>dbName</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to store the database name.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>usrName</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to store the user name for connecting to the database.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>pswd</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to store the password of the database.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>sqlType</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to store the sqlType. In case of the module it is set <code>postgresql</code>.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>tableInfo</em></p></td>
+<td align="center" valign="top"><p class="table"><em>TableInfo</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to save table information.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>fieldsInQuery</em></p></td>
+<td align="center" valign="top"><p class="table"><em>ArrayList&lt;Field&gt;</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to store the names of the fields generated in a query.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>values</em></p></td>
+<td align="center" valign="top"><p class="table"><em>ArrayList&lt;Value&gt;</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to store the values of fields generated in a query.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_methods_of_databaseconnect">8.2. Methods of DatabaseConnect:</h3>
+<div class="paragraph"><p><strong>The important methods of class DatabaseConnect are:</strong></p></div>
+<div class="tableblock">
+<table rules="all"
+style="margin-left:auto; margin-right:auto;"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<thead>
+<tr>
+<th align="center" valign="top">Method </th>
+<th align="center" valign="top">Return Type </th>
+<th align="center" valign="top">Parameters </th>
+<th align="center" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setSQLType(String args)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>args</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>used to set the SQL type</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setPassword(String args)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>args</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>used to set the password.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setDbName(String name)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>name</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>used to set database name.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>setUsrName(String name)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>name</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>used to set databas.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getDbName()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>used to get the database name.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getUsrname()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>used to return the database users&#8217;s name.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getPswd()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Returns the password of the database.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getSQLType()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>returns the sql type. In case of this module it is <code>postgres</code>.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getTableInfo(String arg)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>used to initialize the  table.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>insertInto(String tableName,Object&#8230; vals)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>tableName</code>,<code>vals:</code> Is an Objects&#8230; can be used to pass multiple row entries to inserted into the table</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to insert data into the table.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>makeQuery(String query)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>query</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to execute the given query.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>findValue(String fieldName,Object fieldValue,String resultFieldName)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>fieldName</code>,<code>fieldValue</code>,<code>resultFieldName</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Is equivalent to <code>"SELECT " + resultFieldName+" FROM "+ tableInfo.getTableName() +" WHERE "+ fieldName +" = '"+ fieldValue + "'"</code></em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>findData(String fieldName,Object fieldValue)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>fieldName</code>,<code>fieldValue</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Is equivalent to <code>"SELECT * " +" FROM "+ tableInfo.getTableName() +" WHERE "+ fieldName +" = '"+ fieldValue + "'"</code></em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>getRow()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>String</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to get row got after the query is executed.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>connectToDataBase(String Type,String Name,String usr,String password)</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em><code>Type</code> , <code>Name:</code> database name , <code>usr:</code> user name , <code>password</code></em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to connect to the database.</em></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><em>closeConnection()</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>void</em></p></td>
+<td align="center" valign="top"><p class="table"><em>Used to close the connection.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2014-07-13 15:14:15 IST
+</div>
+</div>
+</body>
+</html>
